@@ -37,9 +37,9 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
-  #gem 'database_rewinder'
-  #gem 'vcr'
-  #gem 'webmock'
-  #gem 'rubocop-rails', require: false
-  #gem 'rubocop-rspec', require: false
+  gem 'database_rewinder'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
