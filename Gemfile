@@ -12,7 +12,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#For user authentication
 gem 'devise'
+# Bootstrap gem
+gem 'bootstrap', '~> 5.0.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,9 +40,9 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
-  gem 'database_rewinder'
-  gem 'vcr'
-  gem 'webmock'
+  #gem 'database_rewinder'
+  #gem 'vcr'
+  #gem 'webmock'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
