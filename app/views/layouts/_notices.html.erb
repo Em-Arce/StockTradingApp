@@ -1,2 +1,12 @@
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<div class="container">
+  <% if notice %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+</div>
