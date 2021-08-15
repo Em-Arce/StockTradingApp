@@ -1,22 +1,42 @@
 require 'rails_helper'
 
+#User is both broker and buyer
 RSpec.describe "Register a new user", type: :feature do
   it 'when valid inputs are given' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'Email', with: 'test@test.com'
-    fill_in 'user_password', with: 'testtest'
-    fill_in 'user_password_confirmation', with: 'testtest'
+    fill_in 'Email', with: 'testreg@test.com'
+    page.find('#user_broker option[value="true"]').select_option
+    page.find('#user_buyer option[value="true"]').select_option
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
     #expect(page).to have_content('Welcome!')
     #expect(current_path).to eq welcome_path
     user = User.order('id').last
     user_count = User.count
-    expect(user.email).to eq('test@test.com')
     expect(user_count).to eq(1)
+    expect(user.email).to eq('testreg@test.com')
+    expect(user.broker).to eq(true)
+    expect(user.buyer).to eq(true)
   end
 
-  it 'when password and password confirmation fields are different' do
+  it 'not when broker and buyer fields are both set to false' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email', with: 'test@test.com'
+    page.find('#user_broker option[value="false"]').select_option
+    page.find('#user_buyer option[value="false"]').select_option
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'Sign up'
+    expect(page).to have_content("Broker and buyer fields cannot both be false.")
+    expect(current_path).to eq '/users'
+    user = User.count
+    expect(user).to eq(0)
+  end
+
+  it 'not when password and password confirmation fields are different' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: 'test@test.com'
@@ -30,7 +50,7 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(0)
   end
 
-  it 'when invalid email is given' do
+  it 'not when invalid email is given' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: 'test.test.com'
@@ -43,7 +63,7 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(0)
   end
 
-  it 'when email field is blank' do
+  it 'not when email field is blank' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: ''
@@ -56,7 +76,7 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(0)
   end
 
-  it 'when password field is blank' do
+  it 'not when password field is blank' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: 'test@test.com'
@@ -69,7 +89,7 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(0)
   end
 
-  it 'when password confirmation filed is blank' do
+  it 'not when password confirmation field is blank' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: 'test@test.com'
@@ -82,7 +102,7 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(0)
   end
 
-  it 'when email is already used for registration' do
+  it 'not when email is already used for registration' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'Email', with: 'test@test.com'
@@ -107,7 +127,7 @@ end
 
 
 RSpec.describe "Registration form", type: :feature do
-  it 'redirects to login page' do
+  it 'should redirect to login page' do
     visit root_path
     click_link 'Sign Up'
     click_link 'Log in'
