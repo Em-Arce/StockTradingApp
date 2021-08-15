@@ -12,9 +12,15 @@ class User < ApplicationRecord
   validates :email , presence: true, uniqueness: { case_sensetive:false },
             format: { with:VALID_EMAIL_REGEX, multiline:true }
   validates :password, presence: true, length: { minimum: 6 }
+  #below also validates presense of true or false
+  validates :broker, exclusion: [nil]
+  validates :buyer, inclusion: { in: [true,false] }
+  #make sure that both broker and buyer fields are not set to false
+  validate :broker_and_buyer_fields_cannot_be_false, on: [:create, :update]
 
-  #def role_names=(role)
-  #  roles = Role.where("name IN (?)", role)
-  #  self.roles << roles
-  #end
+  def broker_and_buyer_fields_cannot_be_false
+    if !broker? && !buyer?
+      errors.add(:broker, "and buyer fields cannot both be false.")
+    end
+  end
 end
