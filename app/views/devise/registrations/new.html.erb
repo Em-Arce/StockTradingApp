@@ -9,6 +9,22 @@
   </div>
 
   <div class="field">
+    <%# f.label :role_names %>
+    <%# f.select :role_names, options_for_select(["broker", "buyer"]), {},
+                  {:multiple => true } %>
+  </div>
+
+  <div>
+    <span>Register as a <%= f.label :broker %>?</span><br />
+    <%= f.select :broker, ['true', 'false'], selected: 'false' %>
+  </div>
+
+  <div>
+    <span>Register as a <%= f.label :buyer %>?</span><br />
+    <%= f.select :buyer, ['true', 'false'], selected: 'true' %><br>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
