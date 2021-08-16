@@ -11,8 +11,7 @@ RSpec.describe "Register a new user", type: :feature do
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
-    #expect(page).to have_content('Welcome!')
-    #expect(current_path).to eq welcome_path
+    expect(current_path).to eq static_pages_welcome_path
     user = User.order('id').last
     user_count = User.count
     expect(user_count).to eq(1)
@@ -109,8 +108,7 @@ RSpec.describe "Register a new user", type: :feature do
     fill_in 'user_password', with: 'testtest'
     fill_in 'user_password_confirmation', with: 'testtest'
     click_button 'Sign up'
-    #expect(page).to have_content("Welcome!")
-    #expect(current_path).to eq welcome_path
+    expect(current_path).to eq static_pages_welcome_path
     click_link 'Logout'
     click_link 'Sign Up'
     fill_in 'Email', with: 'test@test.com'
@@ -123,8 +121,6 @@ RSpec.describe "Register a new user", type: :feature do
     expect(user).to eq(1)
   end
 end
-
-
 
 RSpec.describe "Registration form", type: :feature do
   it 'should redirect to login page' do
