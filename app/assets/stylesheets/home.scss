@@ -10,7 +10,7 @@ body {
     position: relative;
     color: slategray;
     height: 100vh;
-    background-image: url("/stock.jpg");
+    background-image: url("/morgan-housel-PcDGGex9-jA-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -42,23 +42,17 @@ body {
     margin: 10px 10px;
 }
 
-.btn-peach {
-    background-color: #E58675;
-    color: #FFF;
-}
-
-.btn-purple {
-    background-color: #454380;
-    color: #FFF;
-}
-
-.btn-orange {
-    background-color: #F2A76A;
-    color: #FFF;
-}
-
 .btn-gold {
     /*background-color: #FFE55C;#FFBD1B*/
     background-color: #F5BD02;
     color: #FFF;
 }
+
+.btn-margin {
+    margin: 10px 0;
+}
+
+.btn-wide {
+    width: 90%;
+}
+
