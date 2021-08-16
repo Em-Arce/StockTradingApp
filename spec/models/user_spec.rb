@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   subject {
-         described_class.new(password: "some_password",
-                             email: "jane@doe.com")
+         described_class.new(email: "jane@doe.com",
+                             role_names: nil,
+                             admin:false,
+                             broker:true,
+                             buyer:true,
+                             password: "some_password")
   }
 
   describe "Validations" do
@@ -22,13 +26,27 @@ RSpec.describe User, :type => :model do
       expect(subject).to_not be_valid
     end
 
-    it "is invalid invalid email format" do
-      subject.email = "test@example,com"
-      expect(subject).to_not be_valid, "#{subject.email.inspect} is invalid."
+    it "is invalid with invalid email formats" do
+      invalid_addresses = %w[ user@example,com, user_at_foo.org user.name@example. foo@bar+baz.com]
+      invalid_addresses.each do |invalid_address|
+        subject.email = invalid_address
+        expect(subject).to_not be_valid, "#{invalid_address.inspect} is invalid."
+      end
     end
 
     it "is invalid with short password" do
-      subject.password = "t" * 5
+      subject.password = "a" * 5
+      expect(subject).to_not be_valid
+    end
+
+    it "is invalid with long password" do
+      subject.password = "a" * 255
+      expect(subject).to_not be_valid
+    end
+
+    it "is invalid with false values for broker && buyer" do
+      subject.broker = false
+      subject.buyer = false
       expect(subject).to_not be_valid
     end
   end
