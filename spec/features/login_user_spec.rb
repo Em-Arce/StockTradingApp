@@ -2,7 +2,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Login', type: :feature do
-  let(:user) {User.create!(email: 'test@example.com', password: 'password')}
+  let(:user) {User.create!(email: 'test@example.com', role_names: nil,
+                admin:false, broker:true, buyer:true,
+                password: 'password' )}
 
   before do
     visit root_path
@@ -13,8 +15,7 @@ RSpec.describe 'Login', type: :feature do
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
     click_button 'Log in'
-    #expect(current_path).to eq categories_path
-    #expect(page).to have_content('Categories')
+    expect(current_path).to eq static_pages_welcome_path
   end
 
     it 'when email field is blank' do
