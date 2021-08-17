@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_user
   before_action :set_user, only: %i[show edit update destroy]
+
   def index
     @users = User.all
   end
@@ -31,6 +34,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def admin_user
+      unless current_user.admin?
+        redirect_to static_pages_welcome_path, notice: "Unauthorized access."
+      end
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
