@@ -1,0 +1,11 @@
+<h1>Welcome!</h1>
+<h5 class="card-title task-title"><%= @user.email %></h5>
+    <p class="card-text">Admin: <%= @user.admin? %></p>
+    <p class="card-text">Broker: <%= @user.broker? %></p>
+    <p class="card-text">Buyer: <%= @user.buyer? %></p>
+    <p><%= link_to 'Back', users_path(@user.id), class: "btn btn-gold" %></p>
+    <p><%= link_to 'Edit', edit_user_path(@user.id), class: "btn btn-gold" %></p>
+    <p><%= link_to 'Delete', @user,
+                  method: :delete, data: { confirm: 'Are you sure?' },
+                  class: "btn btn-gold" %></p>
+
