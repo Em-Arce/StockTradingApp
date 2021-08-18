@@ -33,7 +33,7 @@ RSpec.describe 'Shows a user', type: :feature do
   end
 
   context 'checks for buttons' do
-    it 'Back: should redirect admin to index' do
+    it 'Back: should redirect admin to index page' do
       user_admin = create(:admin)
       user1      = create(:user)
       visit root_path
@@ -51,7 +51,7 @@ RSpec.describe 'Shows a user', type: :feature do
   end
 
   context 'checks for buttons' do
-    it 'Edit: should redirect admin to edit' do
+    it 'Edit: should redirect admin to edit page' do
       user_admin = create(:admin)
       user1      = create(:user)
       visit root_path
