@@ -1,0 +1,7 @@
+<h1>Users List</h1>
+<% @users.each do |user| %>
+  <div>
+    <h5 class="card-title task-title"><%= link_to user.email, user %></h5>
+    <%# link_to 'Edit', edit_user_path(user.id), class: "btn btn-gold" %>
+  </div>
+<% end %>

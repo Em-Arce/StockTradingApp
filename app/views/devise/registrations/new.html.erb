@@ -1,44 +1,55 @@
-<h2>Create an Account</h2>
+<div class="d-flex justify-content-center">
+  <div class="card flex-column shadow p-3 mb-5 bg-body rounded" style="width: 27rem;">
+    <h2>Create an Account</h2>
+    <div class="form-container">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field form-group mb-6">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",
+              class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="field form-group my-6">
+          <%# f.label :role_names %>
+          <%# f.select :role_names, options_for_select(["broker", "buyer"]),{},
+                        {:multiple => true, class:"form-control" } %>
+        </div>
+
+        <div class="field form-group my-6">
+          <span>Register as a <%= f.label :broker %>?</span><br />
+          <%= f.select :broker, ['true', 'false'], selected: 'false',
+              class: "form-control" %>
+        </div>
+
+        <div class="field form-group my-6">
+          <span>Register as a <%= f.label :buyer %>?</span><br />
+          <%= f.select :buyer, ['true', 'false'], selected: 'true' %><br>
+        </div>
+
+        <div class="field form-group my-6">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password",
+              class: "form-control" %>
+        </div>
+
+        <div class="field form-group my-6">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password",
+              class: "form-control" %>
+        </div>
+
+        <div class="actions d-flex justify-content-center">
+          <%= f.submit "Sign up", class: "btn btn-gold btn-margin btn-wide" %>
+        </div>
+      <% end %>
+      <div class="actions d-flex justify-content-center" id="Login">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :role_names %><br />
-    <%= f.select :role_names, options_for_select(["broker", "buyer"]),{},
-                  {:multiple => true } %>
-  </div>
-
-  <div>
-    <span>Register as a <%= f.label :broker %>?</span><br />
-    <%= f.select :broker, ['true', 'false'], selected: 'false' %>
-  </div>
-
-  <div>
-    <span>Register as a <%= f.label :buyer %>?</span><br />
-    <%= f.select :buyer, ['true', 'false'], selected: 'true' %><br>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-<%= render "devise/shared/links" %>
+</div>
