@@ -17,6 +17,14 @@ body {
 
 }
 
+a {
+    text-decoration: none;
+    color: slategray;
+    &:hover {
+        color: #55529C;
+    }
+}
+
 .home-container {
     position: absolute;
     height: 300px;
