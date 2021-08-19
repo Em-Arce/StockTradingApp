@@ -1,4 +1,4 @@
-<h1>Welcome <%= current_user.email.humanize %>!</h1>
+<h1>Welcome <%= get_user_name(current_user.id).humanize %>!</h1>
 <% if current_user.admin? %>
   <%# non admin users must not see button to go to User Index %>
   <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
