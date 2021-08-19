@@ -122,12 +122,3 @@ RSpec.describe "Register a new user", type: :feature do
   end
 end
 
-RSpec.describe "Registration form", type: :feature do
-  it 'should redirect to login page' do
-    visit root_path
-    click_link 'Sign Up'
-    click_link 'Log in'
-    expect(page).to have_content('Log in')
-    expect(current_path).to eq '/users/sign_in'
-  end
-end
