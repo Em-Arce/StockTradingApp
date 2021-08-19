@@ -1,7 +1,7 @@
 <h1>Welcome <%= current_user.email.humanize %>!</h1>
 <% if current_user.admin? %>
   <%# non admin users must not see button to go to User Index %>
-  <%= link_to 'Users List', users_path(current_user.id), class: "btn btn-gold" %>
+  <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
   <%#  for non admin demo: uncomment below links and comment above if statement  %>
   <%= link_to 'Edit', edit_user_path(current_user.id), class: "btn btn-gold" %>
   <%= link_to 'Show', user_path(current_user.id), class: "btn btn-gold" %>
