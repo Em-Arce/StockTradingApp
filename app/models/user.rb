@@ -25,6 +25,9 @@ class User < ApplicationRecord
   before_create :set_user_status
   validates :status , presence: true, on:[:update]
 
+  #callback for sending email notification
+  after_create :send_email
+
   def broker_and_buyer_fields_cannot_be_false
     if !broker? && !buyer?
       errors.add(:broker, "and buyer fields cannot both be false.")
@@ -36,6 +39,14 @@ class User < ApplicationRecord
       self.status = "Pending"
     else
       self.status = "Approved"
+    end
+  end
+
+  def send_email
+    if status == "Approved"
+      UserMailer.welcome_email(self).deliver_now
+    else
+      UserMailer.welcome_broker(self).deliver_now
     end
   end
 
