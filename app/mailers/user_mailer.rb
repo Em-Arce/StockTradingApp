@@ -11,6 +11,11 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Welcome to StockTradingApp')
   end
+
+  def broker_approved(user)
+    @user = user
+    mail(to: @user.email, subject: 'Broker account approved')
+  end
 end
 
 

@@ -10,4 +10,9 @@ class UserMailerPreview < ActionMailer::Preview
     user = User.last
     UserMailer.welcome_broker(user)
   end
+
+  def broker_approved
+    user = User.last
+    UserMailer.broker_approved(user)
+  end
 end
