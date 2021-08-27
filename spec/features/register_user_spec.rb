@@ -120,5 +120,62 @@ RSpec.describe "Register a new user", type: :feature do
     user = User.count
     expect(user).to eq(1)
   end
+
+  it 'status: Approved when role is buyer only' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email', with: 'testreg@test.com'
+    page.find('#user_broker option[value="false"]').select_option
+    page.find('#user_buyer option[value="true"]').select_option
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'Sign up'
+    expect(current_path).to eq static_pages_welcome_path
+    user = User.order('id').last
+    user_count = User.count
+    expect(user_count).to eq(1)
+    expect(user.email).to eq('testreg@test.com')
+    expect(user.broker).to eq(false)
+    expect(user.buyer).to eq(true)
+    expect(user.status).to eq("Approved")
+  end
+
+  it 'status: Pending when role is broker only' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email', with: 'testreg@test.com'
+    page.find('#user_broker option[value="true"]').select_option
+    page.find('#user_buyer option[value="false"]').select_option
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'Sign up'
+    expect(current_path).to eq static_pages_welcome_path
+    user = User.order('id').last
+    user_count = User.count
+    expect(user_count).to eq(1)
+    expect(user.email).to eq('testreg@test.com')
+    expect(user.broker).to eq(true)
+    expect(user.buyer).to eq(false)
+    expect(user.status).to eq("Pending")
+  end
+
+  it 'status: Pending when roles are broker and buyer' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email', with: 'testreg@test.com'
+    page.find('#user_broker option[value="true"]').select_option
+    page.find('#user_buyer option[value="true"]').select_option
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'Sign up'
+    expect(current_path).to eq static_pages_welcome_path
+    user = User.order('id').last
+    user_count = User.count
+    expect(user_count).to eq(1)
+    expect(user.email).to eq('testreg@test.com')
+    expect(user.broker).to eq(true)
+    expect(user.buyer).to eq(true)
+    expect(user.status).to eq("Pending")
+  end
 end
 
