@@ -1,7 +1,14 @@
-<h1>Users List</h1>
+<h1>Awaiting status approval: <%= @users_pending.count %></h1>
+<% @users_pending.each do |user| %>
+  <div>
+    <h5 class="card-title task-title"><%= link_to user.email, user %> | <%= user.status %> </h5>
+  </div>
+<% end %>
+
+<h1> All users: <%= @users.count %></h1>
 <% @users.each do |user| %>
   <div>
-    <h5 class="card-title task-title"><%= link_to user.email, user %></h5>
-    <%# link_to 'Edit', edit_user_path(user.id), class: "btn btn-gold" %>
+    <h5 class="card-title task-title"><%= link_to user.email, user %> | <%= user.status %>
+        <%# link_to 'Change Status', change_path(user.id), method: :put, class: "btn btn-gold" %> </h5>
   </div>
 <% end %>

@@ -9,7 +9,9 @@ class User < ApplicationRecord
   #ensure that email is present, unique and processed as if case insensitive
   validates :email , presence: true, uniqueness: { case_sensetive:false },
             format: { with:VALID_EMAIL_REGEX, multiline:true }
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
+  validates :password, length: { minimum: 6 }, on: :update, allow_blank: true
+
 
   #METHOD 1 to do role based access/permissions
   #Add admin, broker and buyer columns as boolean
@@ -19,9 +21,21 @@ class User < ApplicationRecord
   #use below method to ensure that both broker and buyer fields are not set to false
   validate :broker_and_buyer_fields_cannot_be_false, on: [:create, :update]
 
+  #callback for user status modification after create
+  before_create :set_user_status
+  validates :status , presence: true, on:[:update]
+
   def broker_and_buyer_fields_cannot_be_false
     if !broker? && !buyer?
       errors.add(:broker, "and buyer fields cannot both be false.")
+    end
+  end
+
+  def set_user_status
+    if broker? || ( broker? && buyer? ) #if signed up as broker or multiple role
+      self.status = "Pending"
+    else
+      self.status = "Approved"
     end
   end
 
@@ -33,8 +47,8 @@ class User < ApplicationRecord
   #use serialize method to save role_names as array of strings
   serialize :role_names, Array
 
-  #get the role/s from form and use it to search in Role Table so that the role_id/s
-  #can be taken and passed /used to create RoleUser entries (user with multiple roles)
+  #get the role/s from registration form and use it to search in Role Table so that the role_id/s
+  #can be taken and passed/used to create RoleUser entries (user with multiple roles)
   #when user is created
   def role_names=(role)
     #secure syntax that does not show the actual value/s being searched and compared to names in Role

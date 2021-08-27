@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
   def configure_devise_permitted_parameters
     # Add columns into the allowed parameter for sign up action
-    devise_parameter_sanitizer.permit(:sign_up, keys:[{ role_names: [] }, :admin, :broker, :buyer])
+    devise_parameter_sanitizer.permit(:sign_up, keys:[{ role_names: [] }, :admin, :broker, :buyer, :status])
   end
 
   def after_sign_in_path_for(resource)

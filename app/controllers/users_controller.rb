@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy ]
 
   def index
+    @users_pending = User.where(status: "Pending")
     @users = User.all
   end
 
@@ -45,6 +46,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :broker, :buyer)
+      params.require(:user).permit(:email, :broker, :buyer, :status)
     end
 end

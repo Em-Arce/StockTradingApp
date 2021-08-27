@@ -17,6 +17,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 # Bootstrap gem
 gem 'bootstrap', '~> 5.0.1'
+gem 'pry'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
