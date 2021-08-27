@@ -11,9 +11,10 @@ RSpec.describe 'Shows a user', type: :feature do
     click_button 'Log in'
     visit users_path
     expect(current_path).to eq users_path
-    expect(page).to have_content('Users List')
+    expect(page).to have_content('Awaiting account approval')
+    expect(page).to have_content('All users')
     expect(page).to have_content("#{user1.email}")
-    click_link "#{user1.email}"
+    first("a[href='/users/#{user1.id}']").click
     visit user_path(id: user1.id)
     expect(current_path).to eq user_path(id: user1.id)
     expect(page).to have_content('Welcome!')
@@ -46,7 +47,8 @@ RSpec.describe 'Shows a user', type: :feature do
       click_link 'Back'
       visit users_path
       expect(current_path).to eq users_path
-      expect(page).to have_content('Users List')
+      expect(page).to have_content('Awaiting account approval')
+      expect(page).to have_content('All users')
     end
   end
 

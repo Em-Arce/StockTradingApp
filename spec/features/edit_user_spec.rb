@@ -15,18 +15,19 @@ RSpec.describe 'Edits a user', type: :feature do
     fill_in 'Email', with: 'testedit@test.com'
     page.find('#user_broker option[value="true"]').select_option
     page.find('#user_buyer option[value="true"]').select_option
-    fill_in 'user_password', with: 'password'
-    fill_in 'user_password_confirmation', with: 'password'
+    page.find('#user_status option[value="Approved"]').select_option
     click_button 'Submit'
     visit user_path(id: user1.id)
     expect(current_path).to eq user_path(id: user1.id)
     expect(page).to have_content ("Welcome!")
     expect(page).to have_content ("testedit@test.com")
+    expect(page).to have_content ("Approved")
 
     user1 = User.order("id").last
     expect(user1.email).to eq('testedit@test.com')
     expect(user1.broker).to eq(true)
     expect(user1.buyer).to eq(true)
+    expect(user1.status).to eq("Approved")
   end
 
   it "should be redirected when user is not admin" do
@@ -56,8 +57,6 @@ RSpec.describe 'Edits a user', type: :feature do
       fill_in 'Email', with: ''
       page.find('#user_broker option[value="true"]').select_option
       page.find('#user_buyer option[value="true"]').select_option
-      fill_in 'user_password', with: 'password'
-      fill_in 'user_password_confirmation', with: 'password'
       click_button 'Submit'
       expect(current_path).to eq user_path(id: user1.id)
       expect(page).to have_content('Edit User')
@@ -78,8 +77,6 @@ RSpec.describe 'Edits a user', type: :feature do
       fill_in 'Email', with: "#{user1.email}"
       page.find('#user_broker option[value="false"]').select_option
       page.find('#user_buyer option[value="false"]').select_option
-      fill_in 'user_password', with: 'password'
-      fill_in 'user_password_confirmation', with: 'password'
       click_button 'Submit'
       expect(current_path).to eq user_path(id: user1.id)
       expect(page).to have_content('Edit User')

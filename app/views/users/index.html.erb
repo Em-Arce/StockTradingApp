@@ -1,4 +1,4 @@
-<h1>Awaiting status approval: <%= @users_pending.count %></h1>
+<h1>Awaiting account approval: <%= @users_pending.count %></h1>
 <% @users_pending.each do |user| %>
   <div>
     <h5 class="card-title task-title"><%= link_to user.email, user %> | <%= user.status %> </h5>
