@@ -1,14 +1,40 @@
-<h1>Awaiting account approval: <%= @users_pending.count %></h1>
-<% @users_pending.each do |user| %>
-  <div>
-    <h5 class="card-title task-title"><%= link_to user.email, user %> | <%= user.status %> </h5>
-  </div>
-<% end %>
+<div class="table-container px-4 bg-white">
+  <h3 class="text-center">Awaiting account approval: <%= @users_pending.count %></h3>
+  <table class="table table-hover table-responsive-md text">
+    <thead>
+    <tr>
+      <th scope="col">Email</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @users_pending.each do |user| %>
+        <tr>
+          <td><%= link_to user.email, user %></td>
+          <td class="text"><%= user.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br></br>
 
-<h1> All users: <%= @users.count %></h1>
-<% @users.each do |user| %>
-  <div>
-    <h5 class="card-title task-title"><%= link_to user.email, user %> | <%= user.status %>
-        <%# link_to 'Change Status', change_path(user.id), method: :put, class: "btn btn-gold" %> </h5>
-  </div>
-<% end %>
+<div class="table-container px-4 bg-white">
+  <h3 class="text-center"> All users: <%= @users.count %></h3>
+  <table class="table table-hover table-responsive-md text">
+    <thead>
+    <tr>
+      <th scope="col">Email</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.email, user %></td>
+          <td class="text"><%= user.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

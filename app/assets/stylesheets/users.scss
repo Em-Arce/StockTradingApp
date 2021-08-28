@@ -1,3 +1,57 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap";
+
+html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    color: slategray;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: slategray;
+    &:hover {
+        color: #55529C;
+    }
+}
+
+
+.table-container {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text {
+    color:slategray;
+}
+
+.description {
+    font-size: 25px;
+}
+
+
+.btn-navs {
+    margin: 10px 10px;
+}
+
+.btn-gold {
+    /*background-color: #FFE55C;#FFBD1B*/
+    background-color: #F5BD02;
+    color: #FFF;
+}
+
+.btn-margin {
+    margin: 10px 0;
+}
+
+
+
