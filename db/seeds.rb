@@ -12,3 +12,71 @@ User.create!(email: "railsnewappnotificationaug2021@gmail.com",
              admin: true,
              broker: false,
              buyer: true)
+
+client = IEX::Api::Client.new(
+  publishable_token: "#{ENV["PUBLISHABLE_TOKEN"]}",
+  endpoint: 'https://sandbox.iexapis.com/v1'
+)
+
+MSFT = client.quote('MSFT')
+Stock.create!(symbol: MSFT.symbol,
+              name: MSFT.company_name,
+              latest_price: MSFT.latest_price,
+              latest_time: MSFT.latest_time )
+
+AAPL = client.quote('AAPL')
+Stock.create!(symbol: AAPL.symbol,
+              name: AAPL.company_name,
+              latest_price: AAPL.latest_price,
+              latest_time: AAPL.latest_time )
+
+AMZN = client.quote('AMZN')
+Stock.create!(symbol:AMZN.symbol,
+              name: AMZN.company_name,
+              latest_price: AMZN.latest_price,
+              latest_time: AMZN.latest_time )
+#NFLX
+NFLX = client.quote('NFLX')
+Stock.create!(symbol:NFLX.symbol,
+              name: NFLX.company_name,
+              latest_price: NFLX.latest_price,
+              latest_time: NFLX.latest_time )
+#GOOGL
+GOOGL = client.quote('GOOGL')
+Stock.create!(symbol:GOOGL.symbol,
+              name: GOOGL.company_name,
+              latest_price: GOOGL.latest_price,
+              latest_time: GOOGL.latest_time )
+#BRK.B
+BRKB = client.quote('BRK.B')
+Stock.create!(symbol:BRKB.symbol,
+              name: BRKB.company_name,
+              latest_price: BRKB.latest_price,
+              latest_time: BRKB.latest_time )
+#JPM
+JPM = client.quote('JPM')
+Stock.create!(symbol:JPM.symbol,
+              name: JPM.company_name,
+              latest_price: JPM.latest_price,
+              latest_time: JPM.latest_time )
+#JNJ
+JNJ = client.quote('JNJ')
+Stock.create!(symbol:JNJ.symbol,
+              name: JNJ.company_name,
+              latest_price: JNJ.latest_price,
+              latest_time: JNJ.latest_time )
+
+#SPGI S&P Global Inc
+SPGI = client.quote('SPGI')
+Stock.create!(symbol:SPGI.symbol,
+              name: SPGI.company_name,
+              latest_price: SPGI.latest_price,
+              latest_time: SPGI.latest_time )
+
+#CME Chicago Mercantile Exchange
+CME = client.quote('CME')
+Stock.create!(symbol:CME.symbol,
+              name: CME.company_name,
+              latest_price: CME.latest_price,
+              latest_time: CME.latest_time )
+#binding.pry
