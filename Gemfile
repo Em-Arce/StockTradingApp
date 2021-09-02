@@ -19,6 +19,7 @@ gem 'devise'
 gem 'bootstrap', '~> 5.0.1'
 gem 'pry'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
+gem 'iex-ruby-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
