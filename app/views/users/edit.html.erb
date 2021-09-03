@@ -34,6 +34,11 @@
   </div>
 
   <div class="field">
+    <span><%= f.label :cash %>?</span><br />
+    <%= f.number_field :cash, step: 0.01 %><br>
+  </div>
+
+  <div class="field">
     <%# f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
