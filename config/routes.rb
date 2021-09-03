@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root "home#index"
   get 'static_pages/welcome'
 
-  resources :users
-  resources :stocks
+
+  resources :users do
+    resources :trades
+    resources :stocks
+  end
 end
