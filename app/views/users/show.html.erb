@@ -4,6 +4,7 @@
     <p class="card-text">Broker: <%= @user.broker? %></p>
     <p class="card-text">Buyer: <%= @user.buyer? %></p>
     <p class="card-text">Status: <%= @user.status %></p>
+    <p class="card-text">Cash: <%= @user.cash %></p>
     <p><%= link_to 'Back', users_path(@user.id), class: "btn btn-gold" %></p>
     <p><%= link_to 'Edit', edit_user_path(@user.id), class: "btn btn-gold" %></p>
     <p><%= link_to 'Delete', @user,
