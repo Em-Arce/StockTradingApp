@@ -1,0 +1,24 @@
+<div class="table-container px-4 bg-white">
+  <% if @user.id == current_user.id %>
+    <h3 class="text-center">Trades: <%= @trades.count %></h3>
+    <table class="table table-hover table-responsive-md text">
+      <thead>
+      <tr>
+        <th scope="col">Stock Id</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Purchase Price</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @trades.each do |trade| %>
+          <tr>
+            <td class="text"><%= trade.stock_id %></td>
+            <td class="text"><%= trade.quantity %></td>
+            <td class="text"><%= trade.purchase_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+<br></br>
