@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_02_112510) do
+ActiveRecord::Schema.define(version: 2021_09_03_071716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,22 @@ ActiveRecord::Schema.define(version: 2021_09_02_112510) do
   create_table "stocks", force: :cascade do |t|
     t.string "symbol"
     t.string "name"
-    t.integer "latest_price"
+    t.decimal "latest_price", precision: 10, scale: 2
     t.datetime "latest_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
+  end
+
+  create_table "trades", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "quantity"
+    t.decimal "purchase_price", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_trades_on_stock_id"
+    t.index ["user_id"], name: "index_trades_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,10 +64,13 @@ ActiveRecord::Schema.define(version: 2021_09_02_112510) do
     t.boolean "broker"
     t.boolean "buyer", default: true
     t.string "status"
+    t.decimal "cash", precision: 10, scale: 2
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
+  add_foreign_key "trades", "stocks"
+  add_foreign_key "trades", "users"
 end
