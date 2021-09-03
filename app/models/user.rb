@@ -12,7 +12,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, on: :create
   validates :password, length: { minimum: 6 }, on: :update, allow_blank: true
 
-
   #METHOD 1 to do role based access/permissions
   #Add admin, broker and buyer columns as boolean
   #below also validates presense of true or false
@@ -55,6 +54,7 @@ class User < ApplicationRecord
   has_many :role_users, dependent: :destroy
   has_many :roles, through: :role_users, dependent: :destroy
 
+
   #use serialize method to save role_names as array of strings
   serialize :role_names, Array
 
@@ -65,5 +65,14 @@ class User < ApplicationRecord
     #secure syntax that does not show the actual value/s being searched and compared to names in Role
     roles = Role.where("name IN (?)", role)
     self.roles << roles
+  end
+
+  #trades and stocks associations
+  has_many :trades, dependent: :destroy
+  has_many :stocks, through: :trades, dependent: :destroy
+
+  def update_cash(amount)
+    self.cash = self.cash - amount
+    self.save!
   end
 end
