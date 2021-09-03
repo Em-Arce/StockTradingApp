@@ -1,8 +1,33 @@
-<h1>Welcome <%= get_user_name(current_user.id).humanize %>!</h1>
-<% if current_user.admin? %>
-  <%# non admin users must not see button to go to User Index %>
-  <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
-  <%#  for non admin demo: uncomment below links and comment above if statement  %>
-  <%# link_to 'Edit', edit_user_path(current_user.id), class: "btn btn-gold" %>
-  <%# link_to 'Show', user_path(current_user.id), class: "btn btn-gold" %>
-<% end %>
+<div class="table-container px-4 bg-white">
+  <h3 class="text-center">Stocks List: <%= @stocks.count %></h3>
+  <table class="table table-hover table-responsive-md text">
+    <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Latest Price</th>
+      <th scope="col">Latest Time</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <%# link_to user.email, user %>
+          <td class="text"><%= stock.symbol %></td>
+          <td class="text"><%= stock.name %></td>
+          <td class="text"><%= stock.latest_price %></td>
+          <td class="text"><%= stock.latest_time %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br></br>
+<div class="table-container px-4 bg-white">
+  <h3 class="text-center">Welcome <%= get_user_name(current_user.id).humanize %>!</h3>
+  <% if current_user.admin? %>
+    <%# non admin users must not see button to go to User Index %>
+    <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
+  <% end %>
+</div>
+<br></br>
