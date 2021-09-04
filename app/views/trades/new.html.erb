@@ -1,34 +1,42 @@
-<div class="title">
-  <h2>Buy a Stock </h2>
-</div>
-<%= form_with model: [ @user, @trade ], local: true do |f| %>
-  <% if @trade.errors.any? %>
-    <div id="error_explanation">
-      <h5>The form contains <%= pluralize(@trade.errors.count, "error") %></h5>
-      <ul>
-        <% @trade.errors.full_messages.each do |m| %>
-          <li><%= m %></li>
-        <% end %>
-      </ul>
+ <div class="p-4 bg-white">
+  <div class="title">
+    <h2>Buy a Stock </h2>
+  </div>
+  <%= form_with model: [ @user, @trade ], local: true do |f| %>
+    <% if @trade.errors.any? %>
+      <div id="error_explanation">
+        <h5>The form contains <%= pluralize(@trade.errors.count, "error") %></h5>
+        <ul>
+          <% @trade.errors.full_messages.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :Stock %>
+      <%= f.select(:stock_id, Stock.all.collect {|stock| [stock.symbol, stock.id]}) %>
+    </div>
+
+    <div>
+      <%= f.label :Direction %>
+      <%= f.select :direction, Trade::TYPES %><br>
+    </div>
+
+    <div>
+      <%= f.label :Quantity %>
+      <%= f.number_field :quantity, range: 1..10, step: 1 %><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :price %>
+      <%= f.number_field :purchase_price, step: 0.01 %><br>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", class: "btn btn-gold" %>
     </div>
   <% end %>
-
-  <div>
-    <span>Choose a stock <%= f.label :Stock %>?</span><br />
-    <%= f.select(:stock_id, Stock.all.collect {|stock| [stock.symbol, stock.id]}) %>
-  </div>
-
-  <div>
-    <%= f.label :Quantity %>
-    <%= f.number_field :quantity, range: 1..10, step: 1 %><br>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :purchase_price, step: 0.01 %><br>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Submit", class: "btn btn-gold" %>
-  </div>
-<% end %>
+</div>
+<br></br>
