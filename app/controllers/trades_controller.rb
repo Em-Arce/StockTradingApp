@@ -2,12 +2,17 @@ class TradesController < ApplicationController
 
 def index
   @user = current_user
-  @trades = @user.trades ||= nil
-  trades = @trades
-  @formatted_trades = trades.to_a.group_by(&:stock_id).map{|stock_id, trades|{:stock_id => stock_id.to_i,
-    :quantity => trades.sum {|q| q.quantity.to_i} }}
+  # @trades = @user.trades ||= nil
+  # trades = @trades
+  # use below to group trade by stock id and sum the quantity
+  # @formatted_trades = trades.to_a.group_by(&:stock_id).map{|stock_id, trades|{:stock_id => stock_id.to_i,
+  #   :quantity => trades.sum {|q| q.quantity.to_i} }}
     #:ave_purchase_price => trades.sum {|p,q| p.purchase_price.to_d}/q.quantity.to_i
   #binding.pry
+
+  #use @trade to be able to call the method with stock details: id, name, symbol, quantity
+  @trade = @user.trades.last
+  @formatted_trades = @trade.get_stock_info(@user)
 end
 
 def new

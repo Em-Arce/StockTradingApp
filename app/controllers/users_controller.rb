@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         if @user.broker? && @user.status == "Approved"
-          UserMailer.broker_approved(@user).deliver_now
+          UserMailer.broker_approved(@user).deliver_later
         end
         format.html { redirect_to @user, notice: "#{@user.email} details successfully updated." }
         format.json { render :show, status: :ok, location: @user }

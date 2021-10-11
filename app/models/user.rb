@@ -75,4 +75,10 @@ class User < ApplicationRecord
     self.cash = self.cash - amount
     self.save!
   end
+
+  #callback for setting cash
+  after_create :set_initial_cash
+  def set_initial_cash
+    self.cash = 5000
+  end
 end
