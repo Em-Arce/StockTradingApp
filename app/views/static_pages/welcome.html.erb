@@ -1,3 +1,12 @@
+<div class="table-container p-4 bg-white text-center">
+  <h3 class="text-center">Welcome <%= get_user_name(current_user.id).humanize %>!</h3>
+  <% if current_user.admin? %>
+    <%# non admin users must not see button to go to User Index %>
+    <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
+  <% end %>
+  <%= link_to 'My Portfolio', user_trades_path(current_user.id), class: "btn btn-gold" %>
+</div>
+
 <div class="table-container p-4 bg-white">
   <h3 class="text-center">Stocks Offers: <%= @stocks.count %></h3>
   <table class="table table-hover table-responsive-md text">
@@ -7,7 +16,6 @@
       <th scope="col">Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
-      <th scope="col">Time</th>
     </tr>
     </thead>
     <tbody>
@@ -18,19 +26,10 @@
           <td class="text"><%= stock.name %></td>
           <td class="text"><%= stock.quantity %></td>
           <td class="text"><%= stock.latest_price %></td>
-          <td class="text"><%= stock.latest_time %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 <br></br>
-<div class="table-container px-4 bg-white">
-  <h3 class="text-center">Welcome <%= get_user_name(current_user.id).humanize %>!</h3>
-  <% if current_user.admin? %>
-    <%# non admin users must not see button to go to User Index %>
-    <%= link_to 'Users List', users_path, class: "btn btn-gold" %>
-  <% end %>
-  <%= link_to 'Trade Now', user_trades_path(current_user.id), class: "btn btn-gold" %>
-</div>
-<br></br>
+
