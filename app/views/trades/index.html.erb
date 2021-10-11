@@ -6,6 +6,8 @@
       <thead>
       <tr>
         <th scope="col">Stock Id</th>
+        <th scope="col">Stock Name</th>
+        <th scope="col">Stock Symbol</th>
         <th scope="col">Quantity</th>
       </tr>
       </thead>
@@ -13,12 +15,16 @@
         <% @formatted_trades.each do |trade| %>
           <tr>
             <td class="text"><%= trade[:stock_id] %></td>
+            <td class="text"><%= trade[:stock_name] %></td>
+            <td class="text"><%= trade[:stock_symbol] %></td>
             <td class="text"><%= trade[:quantity]%></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   <% end %>
-  <%= link_to 'Welcome', static_pages_welcome_path, class: "btn btn-gold" %> <%= link_to 'Trade', new_user_trade_path(current_user.id), class: "btn btn-gold" %>
+  <div class= "text-center">
+    <%= link_to 'Trade', new_user_trade_path(current_user.id), class: "btn btn-gold" %>
+  </div>
 </div>
 <br></br>
