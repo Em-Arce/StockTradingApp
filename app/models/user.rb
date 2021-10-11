@@ -43,9 +43,9 @@ class User < ApplicationRecord
 
   def send_email
     if status == "Approved"
-      UserMailer.welcome_email(self).deliver_now
+      UserMailer.welcome_email(self).deliver_later
     else
-      UserMailer.welcome_broker(self).deliver_now
+      UserMailer.welcome_broker(self).deliver_later
     end
   end
 
